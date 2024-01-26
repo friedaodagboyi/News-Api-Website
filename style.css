@@ -1,0 +1,183 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;800&display=swap');
+
+* {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+span{
+    font-size: 24px;
+}
+
+body {
+    background-color: #f8f9fa;
+    margin: 0;
+}
+
+.News-page {
+    text-align: center;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #130101;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.navbar-brand {
+    color: #222 !important;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.navbar-toggler-icon {
+    background-color: #ffffff;
+}
+
+.nav-link {
+    color: #ffffff !important;
+}
+
+/* News cards styles */
+.container {
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    margin-bottom: 20px;
+    /* flex: 0 0 calc(25% - 20px); */
+    flex: 0 0 100%;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.card img {
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.card-title {
+    color: #212529;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.main-news {
+    position: relative;
+    background: url('./images/news-bg-1.jpg') center/cover no-repeat;
+    height: 250px; /* Adjust the height as needed */
+    border-radius: 8px; /* Add border-radius for rounded corners */
+    overflow: hidden;
+    color: hsl(0, 0%, 100%); /* Text color on top of the background image */
+    display: flex;
+    flex-direction: column;
+    justify-content: right; /* Center content vertically */
+    align-items: right; /* Center content horizontally */
+    text-align: center; /* Center text within the container */
+    
+}
+
+.main-news .card-body {
+    /* margin: 10px; */
+    padding: 50px;
+    background: rgba(0, 0, 0, 0.7); 
+    border-radius: 8px; /* Match the border-radius of the main-news container */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+
+.main-news h5.card-title,
+.main-news p.card-text {
+    margin-bottom: 0; /* Remove default margin */
+    font-size: 14px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.main-news a.btn-primary {
+    color: #ffffff; /* Button text color */
+}
+
+.main-news a.btn-primary:hover {
+    color: #ffffff; /* Button text color on hover */
+}
+
+
+
+  /* new code */
+
+  /* Base styles */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto; /* Center the entire row horizontally */
+  }
+  
+  .card {
+    flex: 0 0 30%; /* Define initial width as 30% of available space */
+    min-width: 250px; /* Set minimum width for smaller screens */
+    margin: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Adjustments for specific screen sizes */
+  @media only screen and (max-width: 768px) {
+    .card {
+      flex: 0 0 80%; /* Increase width to 50% on tablets */
+    }
+  }
+  
+  @media only screen and (max-width: 576px) {
+    .card {
+      flex: 0 0 90%; /* Make cards full width on mobiles */
+    }
+  }
+  
+  /* Additional styling for card elements (optional) */
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .card-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .card-text {
+    line-height: 1.5;
+  }
+  
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  
+  
+

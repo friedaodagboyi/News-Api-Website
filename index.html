@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>News App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="News-page">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark mx-6">
+            <div class="container-fluid">
+                <a class="navbar-brand bg-white text-dark px-2" href="#">NEWSINFO</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Sports</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Movies</a>
+                        </li> -->
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+                        <button id="search" class="btn btn-outline-warning" type="submit">Enter</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- News cards -->
+        <div class="container">
+
+          
+
+            <div class="main-news">
+    
+              <div class="card-body ">
+                <h2 class="card-title my-4 text-white">Welcome to NEWSINFO (<span id="resultCount"></span>)</h2>
+                <p >Get access to the biggest headlines with NEWSINFO</p>
+              </div>
+
+            </div>
+           
+
+              <div class="row content">
+                <div class="card my-4 mx-2" style="width: 18rem">
+                  <img src="..." class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">News</h5>
+                    <p class="card-text">
+                      ...............
+                    </p>
+                    <a href="#" class="btn btn-warning">Read More</a>
+                  </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="d-flex justify-content-around">
+          <button id="prev" class="btn btn-outline-warning my-4"> &lt; Previous Page</button>
+          <button id="next" class="btn btn-outline-warning my-4">Next Page &gt; </button>
+        </div>
+        
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+
+  <script>
+    let currentPage = 1;
+
+    const fetchNews = async (page, query = '') => {
+      console.log(`Fetching news for Page number ${page}...`);
+      var url =
+        'https://newsapi.org/v2/top-headlines?' +
+        'from=2024-01-25&' +
+        'pageSize=20&' +
+        'language=en&' +
+        'page=' + page +
+        (query ? '&q=' + encodeURIComponent(query) : '') +
+        '&sortBy=popularity&' +
+        'country=us&' +
+        'apiKey=1627e9c8b86e45edabb15aba8cf5771a';
+
+      var req = new Request(url);
+
+      let a = await fetch(req);
+      let response = await a.json();
+      console.log(JSON.stringify(response));
+
+      console.log(response);
+      let str = "";
+      resultCount.innerHTML = response.totalResults;
+      for (let item of response.articles) {
+        if (item.title && item.description && item.urlToImage) {
+          // Shorten the description text to a specified length (e.g., 100 characters)
+          let shortDescription = item.description.length > 100 ? item.description.slice(0, 100) + '...' : item.description;
+          let shortTitle = item.title.length > 80 ? item.title.slice(0, 80) + '...' : item.title;
+
+          str = str + `<div class="card my-4 mx-2" style="width: 18rem">
+                  <img src="${item.urlToImage}" class="card-img-top" alt="..." />
+                  <div class="card-body">
+                    <h5 class="card-title">${shortTitle}</h5>
+                    <p class="card-text">
+                      ${shortDescription}
+                    </p>
+                    <a href="${item.url}" target="_blank" class="btn btn-warning">Read More</a>
+                  </div>
+                </div>`;
+        }
+      }
+
+      document.querySelector(".content").innerHTML = str;
+    };
+
+    const loadPreviousPage = () => {
+      if (currentPage > 1) {
+        currentPage--;
+        fetchNews(currentPage);
+      }
+    };
+
+    const loadNextPage = () => {
+      currentPage++;
+      fetchNews(currentPage);
+    };
+
+    fetchNews(currentPage);
+
+    search.addEventListener("click", (e) => {
+      e.preventDefault();
+      let query = searchInput.value;
+      currentPage = 1;
+      fetchNews(currentPage, query);
+    });
+
+    prev.addEventListener("click", (e) => {
+      e.preventDefault();
+      loadPreviousPage();
+    });
+
+    next.addEventListener("click", (e) => {
+      e.preventDefault();
+      loadNextPage();
+    });
+  </script>
+</body>
+
+</html>
+
+   
+    
+    
+
+  </body>
+</html>
